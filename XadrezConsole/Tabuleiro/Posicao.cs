@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Tabuleiro
+namespace tabuleiro
 {
     internal class Posicao
     {
