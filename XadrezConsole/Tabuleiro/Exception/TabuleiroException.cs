@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace tabuleiro
 {
-    /*Enum da cor das peças*/
-    enum Cor
+     class TabuleiroException : Exception
     {
-        Branca,
-        Preta
+        public TabuleiroException(string msg) : base(msg) { }
     }
 }

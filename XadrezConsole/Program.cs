@@ -1,5 +1,6 @@
 ﻿using System;
 using tabuleiro;
+using xadrez;
 
 namespace XadrezConsole
 {
@@ -7,9 +8,20 @@ namespace XadrezConsole
     {
         public static void Main()
         {
-            Tabuleiro tabuleiro = new Tabuleiro(8,8);
+            try
+            {
+                Tabuleiro tabuleiro = new Tabuleiro(8, 8);
+                tabuleiro.colocarPeca(new Torre(tabuleiro, Cor.Branca), new Posicao(0, 1));
+                tabuleiro.colocarPeca(new Rei(tabuleiro, Cor.Preta), new Posicao(0, 5));
+                Posicao pos = new Posicao(0, 10);
+                tabuleiro.pecaExiste(pos);
 
-            Tela.imprimirTela(tabuleiro);
+                Tela.imprimirTela(tabuleiro);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

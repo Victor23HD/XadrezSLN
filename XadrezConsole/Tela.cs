@@ -10,6 +10,8 @@ namespace XadrezConsole
      class Tela
     {
 
+
+        /*For para percorrer a matriz e imprimir o tabuleiro na tela*/
         public static void imprimirTela(Tabuleiro Tab)
         {
             for (int i = 0; i < Tab.Linhas; i++)
@@ -22,7 +24,7 @@ namespace XadrezConsole
                     }
                     else
                     {
-                        Console.Write(Tab.peca(i,j)+" ");
+                        Console.Write(" "+Tab.peca(i,j));
                     }
 
                     

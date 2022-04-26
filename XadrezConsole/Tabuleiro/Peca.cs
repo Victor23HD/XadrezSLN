@@ -8,14 +8,16 @@ namespace tabuleiro
 {
     class Peca
     {
-        public Posicao posicao { get; protected set; }
+        /*Váriaveis de classe*/
+        public Posicao posicao { get; set; }
         public Cor cor { get; set; }
         public int qtdMovimentos { get; protected set; }
         public Tabuleiro tabuleiro { get; protected set; }
 
-        public Peca(Posicao posicao, Cor cor, Tabuleiro tabuleiro)
+        /*Construtor padrão*/
+        public Peca(Tabuleiro tabuleiro, Cor cor)
         {
-            this.posicao = posicao;
+            this.posicao = null;
             this.cor = cor;
             this.tabuleiro = tabuleiro;
             this.qtdMovimentos = 0;
