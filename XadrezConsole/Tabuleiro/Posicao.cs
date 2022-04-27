@@ -17,17 +17,10 @@ namespace tabuleiro
             Coluna = coluna;
         }
 
-        /*ToString() teste, vai ser morto no futuro*/
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append("L:");
-            sb.Append(Linha);
-            sb.Append(" C:");
-            sb.AppendLine(Coluna.ToString());
-
-            return sb.ToString();
+            return Linha + ", " +Coluna;
         }
+
     }
 }
