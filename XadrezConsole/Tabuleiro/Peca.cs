@@ -6,29 +6,29 @@ using System.Threading.Tasks;
 
 namespace tabuleiro
 {
-    class Peca
+    abstract class Peca
     {
         /*Váriaveis de classe*/
         public Posicao posicao { get; set; }
         public Cor cor { get; set; }
         public int qtdMovimentos { get; protected set; }
-        public Tabuleiro tabuleiro { get; protected set; }
+        public Tabuleiro tab { get; protected set; }
 
         /*Construtor padrão*/
         public Peca(Tabuleiro tabuleiro, Cor cor)
         {
             this.posicao = null;
             this.cor = cor;
-            this.tabuleiro = tabuleiro;
+            this.tab = tabuleiro;
             this.qtdMovimentos = 0;
         }
 
-        public void incrementarwtdMovimentos()
+        public void incrementarqtdMovimentos()
         {
             qtdMovimentos++;
         }
 
-       
+        public abstract bool[,] movimentosPossiveis();
 
     }
 }
