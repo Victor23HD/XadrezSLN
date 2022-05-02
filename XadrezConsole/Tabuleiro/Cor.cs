@@ -9,7 +9,7 @@ namespace tabuleiro
     /*Enum da cor das peças*/
     enum Cor
     {
-        Branca,
-        Preta
+        Brancas,
+        Pretas
     }
 }
