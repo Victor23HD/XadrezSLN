@@ -13,6 +13,58 @@ namespace XadrezConsole
     class Tela
     {
 
+        public static void imprimirPartida(PartidaDeXadrez partida)
+        {
+            imprimirTabuleiro(partida.tab);
+            imprimirPecasCapturadas(partida);
+            Console.WriteLine($"\nTurno: {partida.turno} \nJogador atual: {partida.jogadorAtual.ToString()}");
+            imprimeJogada(partida);
+            
+        }
+
+        public static void imprimeJogada(PartidaDeXadrez partida)
+        {
+            /*Pede a peça de origem.*/
+            Console.Write("\nOrigem: ");
+            Posicao origem = lerPosicaoXadrez().toPosition();
+            partida.validarPosicaoOrigem(origem);
+
+            /*Lê os movimentos possiveis*/
+            bool[,] posicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
+            Console.Clear();
+
+            /*Imprime o tabuleiro com os movimentos possiveis e pede o destino das peças*/
+            imprimirTabuleiro(partida.tab, posicoesPossiveis);
+            Console.Write("\nDestino: ");
+            Posicao destino = lerPosicaoXadrez().toPosition();
+            partida.validarPosicaoDestino(origem, destino);
+            partida.realizaJogada(origem, destino);
+        }
+
+        public static void imprimirPecasCapturadas(PartidaDeXadrez partida)
+        {
+            Console.WriteLine("\nPecas capturadas: ");
+            Console.Write("Brancas: ");
+            imprimirConjunto(partida.pecasCapturadas(Cor.Brancas));
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Pretas: ");
+            imprimirConjunto(partida.pecasCapturadas(Cor.Pretas));
+            Console.ForegroundColor = aux;
+        }
+
+        public static void imprimirConjunto(HashSet<Peca> conjunto)
+        {
+            Console.Write("[");
+
+            foreach(Peca x in conjunto)
+            {
+                Console.Write(x+", ");
+            }
+
+            Console.WriteLine("]");
+        }
+
         public static void imprimirTabuleiro(Tabuleiro Tab, bool[,] posicoesPossiveis)
         {
             ConsoleColor fundoOriginal = Console.BackgroundColor;
@@ -69,7 +121,6 @@ namespace XadrezConsole
             Console.ForegroundColor = n2;
 
         }
-
 
         public static PosicaoXadrez lerPosicaoXadrez()
         {
