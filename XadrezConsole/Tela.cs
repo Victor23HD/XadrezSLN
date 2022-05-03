@@ -18,6 +18,10 @@ namespace XadrezConsole
             imprimirTabuleiro(partida.tab);
             imprimirPecasCapturadas(partida);
             Console.WriteLine($"\nTurno: {partida.turno} \nJogador atual: {partida.jogadorAtual.ToString()}");
+            if (partida.Xeque)
+            {
+                Console.WriteLine("XEQUE!!!");
+            }
             imprimeJogada(partida);
             
         }
