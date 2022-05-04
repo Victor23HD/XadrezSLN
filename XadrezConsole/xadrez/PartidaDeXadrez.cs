@@ -52,6 +52,7 @@ namespace xadrez
 
 
         }
+
         /*Metodos de ação*/
         public void realizaJogada(Posicao origem, Posicao destino)
         {
@@ -70,9 +71,22 @@ namespace xadrez
             {
                 Xeque = false;
             }
+            if (testeXequemate(adversaria(jogadorAtual)))
+            {
+                terminada = true;
+                Console.WriteLine("Xeque-Mate!!! \nVencedor: {0}",jogadorAtual);
+                Console.WriteLine("\nSe gostou me siga nos links abaixo!");
+                Console.WriteLine("GitHub: https://github.com/Victor23HD");
+                Console.WriteLine("Lindedln: www.linkedin.com/in/victor23hd \n");
+                
+            }
+            else
+            {
 
-            turno++;
-            mudaJogador();
+                turno++;
+                mudaJogador();
+            }
+
         }
 
         public void validarPosicaoOrigem(Posicao origem)
@@ -165,16 +179,15 @@ namespace xadrez
             return null;
         }
 
-        private bool estaEmXeque(Cor cor)
+        public bool estaEmXeque(Cor cor)
         {
             Peca R = rei(cor);
             if (R == null)
             {
-                throw new TabuleiroException($"Não tem rei da cor {cor} no tabuleiro!");
+                throw new TabuleiroException("Não tem rei da cor " + cor + " no tabuleiro!");
             }
             foreach (Peca x in pecasEmJogo(adversaria(cor)))
             {
-
                 bool[,] mat = x.movimentosPossiveis();
                 if (mat[R.posicao.Linha, R.posicao.Coluna])
                 {
@@ -182,6 +195,37 @@ namespace xadrez
                 }
             }
             return false;
+        }
+
+        public bool testeXequemate(Cor cor)
+        {
+            if (!estaEmXeque(cor))
+            {
+                return false;
+            }
+            foreach (Peca x in pecasEmJogo(cor))
+            {
+                bool[,] mat = x.movimentosPossiveis();
+                for (int i = 0; i < tab.Linhas; i++)
+                {
+                    for (int j = 0; j < tab.Colunas; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Posicao origem = x.posicao;
+                            Posicao destino = new Posicao(i, j);
+                            Peca pecaCapturada = executarMovimento(origem, destino);
+                            bool testeXeque = estaEmXeque(cor);
+                            desfazMovimento(origem, destino, pecaCapturada);
+                            if (!testeXeque)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public void colocarNovaPeca(char coluna, int linha, Peca peca)
@@ -204,12 +248,12 @@ namespace xadrez
 
            }*/
             /*Brancas*/
-            colocarNovaPeca('c', 1, new Torre(tab, Cor.Brancas));
-            colocarNovaPeca('c', 2, new Torre(tab, Cor.Brancas));
-            colocarNovaPeca('d', 2, new Torre(tab, Cor.Brancas));
-            colocarNovaPeca('d', 1, new Rei(tab, Cor.Brancas));
-            colocarNovaPeca('e', 1, new Torre(tab, Cor.Brancas));
-            colocarNovaPeca('e', 2, new Torre(tab, Cor.Brancas));
+             colocarNovaPeca('c', 1, new Torre(tab, Cor.Brancas));
+              colocarNovaPeca('c', 2, new Torre(tab, Cor.Brancas));
+              colocarNovaPeca('d', 2, new Torre(tab, Cor.Brancas));
+              colocarNovaPeca('d', 1, new Rei(tab, Cor.Brancas));
+              colocarNovaPeca('e', 1, new Torre(tab, Cor.Brancas));
+              colocarNovaPeca('e', 2, new Torre(tab, Cor.Brancas));
 
 
             /*Pretas*/
@@ -220,6 +264,16 @@ namespace xadrez
             colocarNovaPeca('d', 8, new Rei(tab, Cor.Pretas));
             colocarNovaPeca('e', 8, new Torre(tab, Cor.Pretas));
             colocarNovaPeca('e', 7, new Torre(tab, Cor.Pretas));
+
+            /*Teste Xeque-Mate*/
+            /*colocarNovaPeca('h',8, new Torre(tab, Cor.Brancas));
+            colocarNovaPeca('h', 1, new Torre(tab, Cor.Brancas));
+            colocarNovaPeca('b', 3, new Torre(tab, Cor.Brancas));
+            colocarNovaPeca('b', 1, new Torre(tab, Cor.Brancas));
+            colocarNovaPeca('a', 7, new Rei(tab, Cor.Pretas));
+            colocarNovaPeca('a', 1, new Rei(tab, Cor.Brancas));*/
+
+
         }
     }
 }

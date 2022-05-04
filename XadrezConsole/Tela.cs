@@ -13,38 +13,6 @@ namespace XadrezConsole
     class Tela
     {
 
-        public static void imprimirPartida(PartidaDeXadrez partida)
-        {
-            imprimirTabuleiro(partida.tab);
-            imprimirPecasCapturadas(partida);
-            Console.WriteLine($"\nTurno: {partida.turno} \nJogador atual: {partida.jogadorAtual.ToString()}");
-            if (partida.Xeque)
-            {
-                Console.WriteLine("XEQUE!!!");
-            }
-            imprimeJogada(partida);
-            
-        }
-
-        public static void imprimeJogada(PartidaDeXadrez partida)
-        {
-            /*Pede a peça de origem.*/
-            Console.Write("\nOrigem: ");
-            Posicao origem = lerPosicaoXadrez().toPosition();
-            partida.validarPosicaoOrigem(origem);
-
-            /*Lê os movimentos possiveis*/
-            bool[,] posicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
-            Console.Clear();
-
-            /*Imprime o tabuleiro com os movimentos possiveis e pede o destino das peças*/
-            imprimirTabuleiro(partida.tab, posicoesPossiveis);
-            Console.Write("\nDestino: ");
-            Posicao destino = lerPosicaoXadrez().toPosition();
-            partida.validarPosicaoDestino(origem, destino);
-            partida.realizaJogada(origem, destino);
-        }
-
         public static void imprimirPecasCapturadas(PartidaDeXadrez partida)
         {
             Console.WriteLine("\nPecas capturadas: ");
@@ -61,19 +29,51 @@ namespace XadrezConsole
         {
             Console.Write("[");
 
-            foreach(Peca x in conjunto)
+            foreach (Peca x in conjunto)
             {
-                Console.Write(x+", ");
+                Console.Write(x + ", ");
             }
 
             Console.WriteLine("]");
         }
 
-        public static void imprimirTabuleiro(Tabuleiro Tab, bool[,] posicoesPossiveis)
+        public static void imprimirTabuleiro(Tabuleiro tab, bool[,] posicoesPossiveis)
         {
+
             ConsoleColor fundoOriginal = Console.BackgroundColor;
             ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
 
+            for (int i = 0; i < tab.Linhas; i++)
+            {
+                ConsoleColor n1 = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write(8 - i + " ", n1);
+                Console.ForegroundColor = n1;
+                
+                for (int j = 0; j < tab.Colunas; j++)
+                {
+                    if (posicoesPossiveis[i, j])
+                    {
+                        Console.BackgroundColor = fundoAlterado;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = fundoOriginal;
+                    }
+                    imprimirPeca(tab.peca(i, j));
+                    Console.BackgroundColor = fundoOriginal;
+                }
+                Console.WriteLine();
+            }
+            ConsoleColor n2 = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("  A B C D E F G H", n2);
+            Console.ForegroundColor = n2;
+        }
+
+        /*For para percorrer a matriz e imprimir o tabuleiro na tela*/
+        public static void imprimirTabuleiro(Tabuleiro Tab)
+        {
 
             for (int i = 0; i < Tab.Linhas; i++)
             {
@@ -84,41 +84,10 @@ namespace XadrezConsole
 
                 for (int j = 0; j < Tab.Colunas; j++)
                 {
-                    if (posicoesPossiveis[i,j])
-                    {
-                        Console.BackgroundColor = fundoAlterado;
-                    }
-                    else
-                    {
-                        Console.BackgroundColor = fundoOriginal;
-                    }
                     imprimirPeca(Tab.peca(i, j));
-
                 }
                 Console.WriteLine();
             }
-            ConsoleColor n2 = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("  A B C D E F G H", n2);
-            Console.ForegroundColor = n2;
-        }
-        /*For para percorrer a matriz e imprimir o tabuleiro na tela*/
-        public static void imprimirTabuleiro(Tabuleiro Tab)
-        {
-
-                for (int i = 0; i < Tab.Linhas; i++)
-                {
-                ConsoleColor n1 = Console.ForegroundColor;
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.Write(8 - i + " ", n1);
-                Console.ForegroundColor = n1;
-
-                    for (int j = 0; j < Tab.Colunas; j++)
-                    {
-                        imprimirPeca(Tab.peca(i, j));
-                    }
-                    Console.WriteLine();
-                }
             ConsoleColor n2 = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("  A B C D E F G H", n2);
@@ -157,12 +126,11 @@ namespace XadrezConsole
                 }
                 Console.Write(" ");
             }
-            
+
         }
 
 
     }
-
 
 }
 

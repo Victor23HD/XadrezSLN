@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using tabuleiro;
+﻿using tabuleiro;
 
 namespace xadrez
 {
-     class Torre : Peca
+    class Torre : Peca
     {
-        public Torre(Tabuleiro tabuleiro, Cor cor) : base(tabuleiro, cor)
+
+        public Torre(Tabuleiro tab, Cor cor) : base(tab, cor)
         {
         }
+
         public override string ToString()
         {
             return "T";
         }
+
         private bool podeMover(Posicao pos)
         {
             Peca p = tab.peca(pos);
             return p == null || p.cor != cor;
-
         }
+
         public override bool[,] movimentosPossiveis()
         {
             bool[,] mat = new bool[tab.Linhas, tab.Colunas];
@@ -78,10 +76,5 @@ namespace xadrez
 
             return mat;
         }
-
-
-        }
-
-        
     }
-
+}
