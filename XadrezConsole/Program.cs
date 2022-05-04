@@ -26,6 +26,7 @@ namespace XadrezConsole
                             Console.WriteLine("XEQUE!!! ");
                         }
                     }
+                    Tela.traducaoPecas();
                     /*Pede a peça de origem.*/
                     Console.Write("\nOrigem: ");
                     Posicao origem = Tela.lerPosicaoXadrez().toPosition();
@@ -33,12 +34,14 @@ namespace XadrezConsole
 
                     /*Lê os movimentos possiveis*/
                     bool[,] posicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
+                    Tela.traducaoPecas();
                     Console.Clear();
 
                     /*Imprime o tabuleiro com os movimentos possiveis e pede o destino das peças*/
                     Tela.imprimirTabuleiro(partida.tab, posicoesPossiveis);
                     Console.Write("\nDestino: ");
                     Posicao destino = Tela.lerPosicaoXadrez().toPosition();
+                    Tela.traducaoPecas();
                     partida.validarPosicaoDestino(origem, destino);
                     partida.realizaJogada(origem, destino);
                 }

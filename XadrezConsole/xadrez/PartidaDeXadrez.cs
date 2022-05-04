@@ -48,7 +48,7 @@ namespace xadrez
                 tab.colocarPeca(pecaCapturada, destino);
                 capturadas.Remove(pecaCapturada);
             }
-            tab.colocarPeca(p,origem);
+            tab.colocarPeca(p, origem);
 
 
         }
@@ -74,8 +74,8 @@ namespace xadrez
             if (testeXequemate(adversaria(jogadorAtual)))
             {
                 terminada = true;
-                Console.WriteLine("Xeque-Mate!!! \nVencedor: {0}",jogadorAtual);
-                
+                Console.WriteLine("Xeque-Mate!!! \nVencedor: {0}", jogadorAtual);
+
             }
             else
             {
@@ -124,8 +124,6 @@ namespace xadrez
                 jogadorAtual = Cor.Brancas;
             }
         }
-
-        /*Metodos de ação*/
 
         /*Metodos de regras de jogo e tabuleiro*/
         public HashSet<Peca> pecasCapturadas(Cor cor)
@@ -234,41 +232,48 @@ namespace xadrez
         private void colocarPecas()
         {
 
-            /*Peão*/
-            /*  for (int i = 0; i < 8; i++)
-           {
-               string texto = "a,b,c,d,e,f,g,h";
-               string[] letras = texto.Split(',');
-               char[] cc = new char[8];
-               cc[i] = char.Parse(letras[i]);
-               colocarNovaPeca(cc[i],3, new Peao(tab, Cor.Brancas));
+            /*Peão Branco*/
+            for (int i = 0; i < 8; i++)
+            {
+                string texto = "a,b,c,d,e,f,g,h";
+                string[] letras = texto.Split(',');
+                char[] cc = new char[8];
+                cc[i] = char.Parse(letras[i]);
+                colocarNovaPeca(cc[i], 2, new Peao(tab, Cor.Brancas));
 
-           }*/
+            }
             /*Brancas*/
-             colocarNovaPeca('c', 1, new Torre(tab, Cor.Brancas));
-              colocarNovaPeca('c', 2, new Torre(tab, Cor.Brancas));
-              colocarNovaPeca('d', 2, new Torre(tab, Cor.Brancas));
-              colocarNovaPeca('d', 1, new Rei(tab, Cor.Brancas));
-              colocarNovaPeca('e', 1, new Torre(tab, Cor.Brancas));
-              colocarNovaPeca('e', 2, new Torre(tab, Cor.Brancas));
 
-
-            /*Pretas*/
-
-            colocarNovaPeca('c', 8, new Torre(tab, Cor.Pretas));
-            colocarNovaPeca('c', 7, new Torre(tab, Cor.Pretas));
-            colocarNovaPeca('d', 7, new Torre(tab, Cor.Pretas));
-            colocarNovaPeca('d', 8, new Rei(tab, Cor.Pretas));
-            colocarNovaPeca('e', 8, new Torre(tab, Cor.Pretas));
-            colocarNovaPeca('e', 7, new Torre(tab, Cor.Pretas));
-
-            /*Teste Xeque-Mate*/
-            /*colocarNovaPeca('h',8, new Torre(tab, Cor.Brancas));
+            colocarNovaPeca('b', 1, new Cavalo(tab, Cor.Brancas));
+            colocarNovaPeca('g', 1, new Cavalo(tab, Cor.Brancas));
+            colocarNovaPeca('c', 1, new Bispo(tab, Cor.Brancas));
+            colocarNovaPeca('f', 1, new Bispo(tab, Cor.Brancas));
+            colocarNovaPeca('a', 1, new Torre(tab, Cor.Brancas));
+            colocarNovaPeca('e', 1, new Dama(tab, Cor.Brancas));
+            colocarNovaPeca('d', 1, new Rei(tab, Cor.Brancas));
             colocarNovaPeca('h', 1, new Torre(tab, Cor.Brancas));
-            colocarNovaPeca('b', 3, new Torre(tab, Cor.Brancas));
-            colocarNovaPeca('b', 1, new Torre(tab, Cor.Brancas));
-            colocarNovaPeca('a', 7, new Rei(tab, Cor.Pretas));
-            colocarNovaPeca('a', 1, new Rei(tab, Cor.Brancas));*/
+
+
+            /*Peão Preto*/
+            for (int i = 0; i < 8; i++)
+            {
+                string texto = "a,b,c,d,e,f,g,h";
+                string[] letras = texto.Split(',');
+                char[] cc = new char[8];
+                cc[i] = char.Parse(letras[i]);
+                colocarNovaPeca(cc[i], 7, new Peao(tab, Cor.Pretas));
+
+            }
+            /*Pretas*/
+            colocarNovaPeca('b', 8, new Cavalo(tab, Cor.Pretas));
+            colocarNovaPeca('g', 8, new Cavalo(tab, Cor.Pretas));
+            colocarNovaPeca('c', 8, new Bispo(tab, Cor.Pretas));
+            colocarNovaPeca('f', 8, new Bispo(tab, Cor.Pretas));
+            colocarNovaPeca('a', 8, new Torre(tab, Cor.Pretas));
+            colocarNovaPeca('d', 8, new Dama(tab, Cor.Pretas));
+            colocarNovaPeca('e', 8, new Rei(tab, Cor.Pretas));
+            colocarNovaPeca('h', 8, new Torre(tab, Cor.Pretas));
+
 
 
         }

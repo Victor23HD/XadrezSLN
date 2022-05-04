@@ -13,6 +13,10 @@ namespace XadrezConsole
     class Tela
     {
 
+        public static void traducaoPecas()
+        {
+            Console.WriteLine("\nP: PEÃO, T: TORRE, C: CAVALO \nB: BISPO, R: REI, D: DAMA");
+        }
         public static void imprimirPecasCapturadas(PartidaDeXadrez partida)
         {
             Console.WriteLine("\nPecas capturadas: ");
@@ -74,9 +78,7 @@ namespace XadrezConsole
         /*For para percorrer a matriz e imprimir o tabuleiro na tela*/
         public static void imprimirTabuleiro(Tabuleiro Tab)
         {
-            Console.WriteLine("Se gostou me siga nos links abaixo!");
-            Console.WriteLine("GitHub: https://github.com/Victor23HD");
-            Console.WriteLine("Lindedin: www.linkedin.com/in/victor23hd \n");
+            
             for (int i = 0; i < Tab.Linhas; i++)
             {
                 ConsoleColor n1 = Console.ForegroundColor;
