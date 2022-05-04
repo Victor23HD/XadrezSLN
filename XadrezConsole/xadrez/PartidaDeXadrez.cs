@@ -75,9 +75,6 @@ namespace xadrez
             {
                 terminada = true;
                 Console.WriteLine("Xeque-Mate!!! \nVencedor: {0}",jogadorAtual);
-                Console.WriteLine("\nSe gostou me siga nos links abaixo!");
-                Console.WriteLine("GitHub: https://github.com/Victor23HD");
-                Console.WriteLine("Lindedln: www.linkedin.com/in/victor23hd \n");
                 
             }
             else
@@ -108,7 +105,7 @@ namespace xadrez
         public void validarPosicaoDestino(Posicao origem, Posicao destino)
         {
 
-            if (!tab.peca(origem).podeMoverPara(destino))
+            if (!tab.peca(origem).movimentoPossivel(destino))
             {
                 throw new TabuleiroException("Sua peça não pode mover para esse destino!");
             }
