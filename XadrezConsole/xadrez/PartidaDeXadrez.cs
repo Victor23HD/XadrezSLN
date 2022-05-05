@@ -29,13 +29,16 @@ namespace xadrez
             colocarPecas();
         }
 
-        public Peca executarMovimento(Posicao origem, Posicao destino)
+        public Peca executaMovimento(Posicao origem, Posicao destino)
         {
             Peca p = tab.retirarPeca(origem);
             p.incrementarqtdMovimentos();
             Peca pecaCapturada = tab.retirarPeca(destino);
             tab.colocarPeca(p, destino);
-            if (pecaCapturada != null) { capturadas.Add(pecaCapturada); }
+            if (pecaCapturada != null)
+            {
+                capturadas.Add(pecaCapturada);
+            }
             return pecaCapturada;
         }
 
@@ -49,20 +52,20 @@ namespace xadrez
                 capturadas.Remove(pecaCapturada);
             }
             tab.colocarPeca(p, origem);
-
-
         }
+
 
         /*Metodos de ação*/
         public void realizaJogada(Posicao origem, Posicao destino)
         {
-            Peca pecaCapturada = executarMovimento(origem, destino);
+            Peca pecaCapturada = executaMovimento(origem, destino);
 
             if (estaEmXeque(jogadorAtual))
             {
                 desfazMovimento(origem, destino, pecaCapturada);
-                throw new TabuleiroException("Você não pode se colocar em Xeque!");
+                throw new TabuleiroException("Você não pode se colocar em xeque!");
             }
+
             if (estaEmXeque(adversaria(jogadorAtual)))
             {
                 Xeque = true;
@@ -71,15 +74,15 @@ namespace xadrez
             {
                 Xeque = false;
             }
+
             if (testeXequemate(adversaria(jogadorAtual)))
             {
                 terminada = true;
-                Console.WriteLine("Xeque-Mate!!! \nVencedor: {0}", jogadorAtual);
-
+                Console.WriteLine("\nObrigado por jogar!");
+                Console.WriteLine("https://www.linkedin.com/feed/");
             }
             else
             {
-
                 turno++;
                 mudaJogador();
             }
@@ -209,7 +212,7 @@ namespace xadrez
                         {
                             Posicao origem = x.posicao;
                             Posicao destino = new Posicao(i, j);
-                            Peca pecaCapturada = executarMovimento(origem, destino);
+                            Peca pecaCapturada = executaMovimento(origem, destino);
                             bool testeXeque = estaEmXeque(cor);
                             desfazMovimento(origem, destino, pecaCapturada);
                             if (!testeXeque)
@@ -233,17 +236,16 @@ namespace xadrez
         {
 
             /*Peão Branco*/
-            for (int i = 0; i < 8; i++)
-            {
-                string texto = "a,b,c,d,e,f,g,h";
-                string[] letras = texto.Split(',');
-                char[] cc = new char[8];
-                cc[i] = char.Parse(letras[i]);
-                colocarNovaPeca(cc[i], 2, new Peao(tab, Cor.Brancas));
-
-            }
+         
             /*Brancas*/
-
+            colocarNovaPeca('a', 2, new Peao(tab, Cor.Brancas));
+            colocarNovaPeca('b', 2, new Peao(tab, Cor.Brancas));
+            colocarNovaPeca('c', 2, new Peao(tab, Cor.Brancas));
+            colocarNovaPeca('d', 2, new Peao(tab, Cor.Brancas));
+            colocarNovaPeca('e', 2, new Peao(tab, Cor.Brancas));
+            colocarNovaPeca('f', 2, new Peao(tab, Cor.Brancas));
+            colocarNovaPeca('g', 2, new Peao(tab, Cor.Brancas));
+            colocarNovaPeca('h', 2, new Peao(tab, Cor.Brancas));
             colocarNovaPeca('b', 1, new Cavalo(tab, Cor.Brancas));
             colocarNovaPeca('g', 1, new Cavalo(tab, Cor.Brancas));
             colocarNovaPeca('c', 1, new Bispo(tab, Cor.Brancas));
@@ -253,25 +255,22 @@ namespace xadrez
             colocarNovaPeca('d', 1, new Rei(tab, Cor.Brancas));
             colocarNovaPeca('h', 1, new Torre(tab, Cor.Brancas));
 
-
-            /*Peão Preto*/
-            for (int i = 0; i < 8; i++)
-            {
-                string texto = "a,b,c,d,e,f,g,h";
-                string[] letras = texto.Split(',');
-                char[] cc = new char[8];
-                cc[i] = char.Parse(letras[i]);
-                colocarNovaPeca(cc[i], 7, new Peao(tab, Cor.Pretas));
-
-            }
             /*Pretas*/
+            colocarNovaPeca('a', 7, new Peao(tab, Cor.Pretas));
+            colocarNovaPeca('b', 7, new Peao(tab, Cor.Pretas));
+            colocarNovaPeca('c', 7, new Peao(tab, Cor.Pretas));
+            colocarNovaPeca('d', 7, new Peao(tab, Cor.Pretas));
+            colocarNovaPeca('e', 7, new Peao(tab, Cor.Pretas));
+            colocarNovaPeca('f', 7, new Peao(tab, Cor.Pretas));
+            colocarNovaPeca('g', 7, new Peao(tab, Cor.Pretas));
+            colocarNovaPeca('h', 7, new Peao(tab, Cor.Brancas));
             colocarNovaPeca('b', 8, new Cavalo(tab, Cor.Pretas));
             colocarNovaPeca('g', 8, new Cavalo(tab, Cor.Pretas));
             colocarNovaPeca('c', 8, new Bispo(tab, Cor.Pretas));
             colocarNovaPeca('f', 8, new Bispo(tab, Cor.Pretas));
             colocarNovaPeca('a', 8, new Torre(tab, Cor.Pretas));
             colocarNovaPeca('d', 8, new Dama(tab, Cor.Pretas));
-            colocarNovaPeca('e', 8, new Rei(tab, Cor.Pretas));
+            colocarNovaPeca('e', 8, new Rei(tab,Cor.Pretas));
             colocarNovaPeca('h', 8, new Torre(tab, Cor.Pretas));
 
 

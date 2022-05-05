@@ -23,7 +23,6 @@ namespace tabuleiro
             this.qtdMovimentos = 0;
         }
 
-
         public bool existemMovimentosPossiveis()
         {
             bool[,] math = movimentosPossiveis();

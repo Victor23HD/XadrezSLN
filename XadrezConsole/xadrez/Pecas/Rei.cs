@@ -9,13 +9,21 @@ namespace xadrez
 {
     class Rei : Peca
     {
-        public Rei(Tabuleiro tabuleiro, Cor cor) : base(tabuleiro, cor)
+        private PartidaDeXadrez partida;
+        public Rei(Tabuleiro tabuleiro,  Cor cor) : base(tabuleiro, cor)
         {
+          
         }
 
         public override string ToString()
         {
             return "R";
+        }
+
+        private bool testeTorreParaRoque(Posicao pos)
+        {
+            Peca p = tab.peca(pos);
+            return p != null && p is Torre && p.cor == cor && qtdMovimentos == 0;
         }
 
         private bool podeMover(Posicao pos)
@@ -77,6 +85,7 @@ namespace xadrez
             {
                 math[pos.Linha, pos.Coluna] = true;
             }
+            
             return math;
         }
     }
